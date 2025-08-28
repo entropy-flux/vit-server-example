@@ -6,7 +6,7 @@ from torch import nn
 from torch import Tensor  
 from torch.nn.functional import softmax
 from torch.nn.functional import gelu 
-import math
+import math 
 
 def scaled_dot_product_attention(q: Tensor, k: Tensor, v: Tensor) -> Tensor:
     scale = 1 / math.sqrt(k.size(-1))  

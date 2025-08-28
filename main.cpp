@@ -11,8 +11,11 @@
 
 using namespace tannic;
 
+// Note: This has a lot of nasty serving code that will be abstracted in
+// a serving framework. This is just for the sake of the example.
+
 int main() {   
-    nn::Parameters parameters; parameters.initialize("../data/B-16-imagenet1k");  
+    nn::Parameters parameters; parameters.initialize("../data/vit-imagenet1k-B-16");  
     ViT model(
       float32,
       16,
