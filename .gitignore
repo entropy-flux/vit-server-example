@@ -1,7 +1,7 @@
 dev/
 build/ 
-data/B-16-imagenet1k.pth
-data/B-16-imagenet1k.tannic
+data/vit-imagenet1k-B-16.pth
+data/vit-imagenet1k-B-16.tannic
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
