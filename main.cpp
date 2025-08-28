@@ -7,7 +7,7 @@
 #include <tannic-nn/functional.hpp>
 #include <tannic-nn/convolutional.hpp>
 #include "include/server.hpp" 
-#include "include/vit.hpp"
+#include "model/vit.hpp"
 
 using namespace tannic;
 
