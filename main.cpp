@@ -16,19 +16,7 @@ using namespace tannic;
 
 int main() {   
     nn::Parameters parameters; parameters.initialize("../data/vit-imagenet1k-B-16");  
-    ViT model(
-      float32,
-      16,
-      3,
-      384,
-      768,
-      3072,
-      12,
-      12,
-      1000
-    );
-
-    model.initialize(parameters);
+    ViT model(float32, 16, 3, 384, 768, 3072, 12, 12, 1000); model.initialize(parameters);
 
     Server server(8080);
     while (true) {

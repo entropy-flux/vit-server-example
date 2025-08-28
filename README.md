@@ -3,7 +3,7 @@
 This repository contains a minimal example of how to use [Tannic-NN](https://github.com/entropy-flux/Tannic-NN) to serve a **Vision Transformer (ViT)** model over a simple socket-based server.  
 
 It is intended as a **baseline reference implementation**, a ground to build upon showing the essential steps of serving a model with Tannic-NN in the simplest possible way.  
-Because this example focuses on clarity rather than performance, **it is not optimized and therefore runs relatively slow**. The goal is to provide a transparent starting point, not a production-ready server.
+The Tannic tensor library is still unoptimized, **it is not optimized and therefore runs relatively slow**. The goal is to provide a transparent starting point, not a production-ready server.
 
 This example demonstrates:  
 - Initializing model parameters (pretrained weights)  
@@ -39,7 +39,20 @@ The model correctly identifies the dog:
 
 ---
 
-## 📦 Dependencies
+## 📦 Dependencies 
+
+- A C++23 compiler (GCC ≥ 14, Clang ≥ 16, etc.)
+- CMake ≥ 3.30
+
+[Download the weights from Hugging Face](https://huggingface.co/entropy-flux/vit-imagenet1k/tree/main). Metadata is already in the repo so only the `vit-imagenet1k-B-16.tannic` file is required. 
+
+And place the file under `data/` folder. You can also download directly from command line:
+
+```bash 
+wget -O data/vit-imagenet1k-B-16.tannic https://huggingface.co/entropy-flux/vit-imagenet1k/resolve/main/vit-imagenet1k-B-16.tannic
+``` 
+
+You can also build the tannic weights directly. Donwload the `vit-imagenet1k-B-16.pth` file from HF, load them in the /model/vit.py python model and use the [PyTannic](https://github.com/entropy-flux/PyTannic) package to write the model as a .tannic file. 
 
 You will need PyTorch and PyTannic (Just for the example, the server doesn't rely on python.)
 PyTannic is a binding I created to easily send torch tensors to the server, you can install it with pip just as:
@@ -48,7 +61,7 @@ PyTannic is a binding I created to easily send torch tensors to the server, you 
 pip install pytannic
 ```
 
-For the example you should also install the `requests` package. 
+For the example you should also install the `requests` package, since it will try to download an image from internet. 
 
 ```bash
 pip install requests
