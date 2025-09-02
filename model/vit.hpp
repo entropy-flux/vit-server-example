@@ -93,8 +93,8 @@ struct Attention : nn::Module {
     Tensor forward(Tensor sequence) const {
         auto q = split(q_projection(sequence));
         auto k = split(k_projection(sequence));
-        auto v = split(v_projection(sequence)); 
-        sequence = scaled_dot_attention(q, k, v); 
+        auto v = split(v_projection(sequence));  
+        sequence = scaled_dot_attention(q, k, v);  
         return merge(sequence);
     } 
 };  
@@ -135,9 +135,9 @@ struct Encoder : nn::Module {
     ,   ffn(dtype, model_dimension, ffn_hidden_dimension)
     ,   ffn_norm(dtype, model_dimension, 1e-6)
     {} 
-
+ 
     Tensor forward(Tensor sequence) const { 
-        sequence = projection(attention(attention_norm(sequence))) + sequence;  
+        sequence = projection(attention(attention_norm(sequence))) + sequence;
         return ffn(ffn_norm(sequence)) + sequence;
     }
  
@@ -248,11 +248,11 @@ struct ViT : nn::Module {
     ,   head(dtype, model_dimension, number_of_classes) {}
   
 
-    Tensor forward(Tensor sequence) const {     
-        sequence = patcher(sequence);       
-        sequence = cls_token(sequence) + positions;   
-        sequence = transformer(sequence);     
-        sequence = norm(sequence);   
+    Tensor forward(Tensor sequence) const {      
+        sequence = patcher(sequence);        
+        sequence = cls_token(sequence) + positions;    
+        sequence = transformer(sequence);      
+        sequence = norm(sequence);    
         return head(sequence[{0,-1}][0]);   
     }
 

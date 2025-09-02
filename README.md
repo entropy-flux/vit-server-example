@@ -44,12 +44,19 @@ The model correctly identifies the dog:
 - A C++23 compiler (GCC ≥ 14, Clang ≥ 16, etc.)
 - CMake ≥ 3.30
 
-[Download the weights from Hugging Face](https://huggingface.co/entropy-flux/vit-imagenet1k/tree/main). Metadata is already in the repo so only the `vit-imagenet1k-B-16.tannic` file is required. 
+[Download the weights from Hugging Face](https://huggingface.co/entropy-flux/vit-imagenet1k/tree/main). Metadata is already in the repo so only the `vit-imagenet1k-B-16.tannic` file is required. However if you want to download it is also alongside the model data in hf. 
 
 And place the file under `data/` folder. You can also download directly from command line:
 
+
+#### Metadata
 ```bash 
-wget -O data/vit-imagenet1k-B-16.tannic https://huggingface.co/entropy-flux/vit-imagenet1k/resolve/main/vit-imagenet1k-B-16.tannic
+wget -O data/vit-imagenet1k-B-16.tannic https://huggingface.co/entropy-flux/vit-imagenet1k/resolve/main/vit-imagenet1k-B-16.metadata.tannic?download=true
+``` 
+
+#### Data
+```bash 
+wget -O data/vit-imagenet1k-B-16.tannic https://huggingface.co/entropy-flux/vit-imagenet1k/resolve/main/vit-imagenet1k-B-16.tannic?download=true
 ``` 
 
 You can also build the tannic weights directly. Donwload the `vit-imagenet1k-B-16.pth` file from HF, load them in the /model/vit.py python model and use the [PyTannic](https://github.com/entropy-flux/PyTannic) package to write the model as a .tannic file. 
@@ -76,17 +83,31 @@ Clone this repo (with submodules) alongside **Tannic-NN**:
 ```bash
 git clone --recursive https://github.com/your-username/vit-server-example.git
 cd vit-server-example
-mkdir build && cd build
-cmake ..
-make -j$(nproc) 
-```
-If you forgot --recursive when clone:
+``` 
+
+Then bring the neural networks library:
 
 ```bash
 git submodule update --init --recursive
 ```
 
-Then from the build directory run the executable:
+Then you will have to build the tannic and tannic-nn libraries. If you are on linux you can run the scripts in both, ```external/tannic-nn/external/tannic``` and ```external/tannic-nn```subdirs. There are scripts to build them, just run:
+
+```bash
+bash build.sh
+```
+
+Then build the server:
+
+```bash 
+mkdir build && cd build
+cmake ..
+make -j$(nproc) 
+```
+
+Inside of them. If you have any workaround to avoid all this please submit a pull request, since I'm not very experienced with cmake.
+
+Finally from the root directory run the executable:
 
 ```bash
 ./vit-server

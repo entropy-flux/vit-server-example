@@ -1,23 +1,22 @@
-#include <tannic.hpp>
-#include <tannic/functions.hpp>
+#include <cstdint>
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <memory>
+#include <tannic.hpp> 
 #include <tannic/reductions.hpp>
+#include <tannic/transformations.hpp>
 #include <tannic/serialization.hpp>
-#include <tannic-nn.hpp>
-#include <tannic-nn/parameters.hpp>
-#include <tannic-nn/functional.hpp>
+#include <tannic-nn.hpp> 
+#include <tannic-nn/functional.hpp> 
 #include <tannic-nn/convolutional.hpp>
-#include "include/server.hpp" 
+#include "server.hpp"  
 #include "model/vit.hpp"
 
-using namespace tannic;
-
-// Note: This has a lot of nasty serving code that will be abstracted in
-// a serving framework. This is just for the sake of the example.
-
-int main() {   
+int main() {    
     nn::Parameters parameters; parameters.initialize("../data/vit-imagenet1k-B-16");  
     ViT model(float32, 16, 3, 384, 768, 3072, 12, 12, 1000); model.initialize(parameters);
-
+ 
     Server server(8080);
     while (true) {
         Socket socket = server.accept();  
