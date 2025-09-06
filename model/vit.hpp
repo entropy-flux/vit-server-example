@@ -48,7 +48,7 @@ struct LayerNorm : public nn::Module {
 
 Tensor scaled_dot_attention(Tensor q, Tensor k, Tensor v) { 
     auto scale   = 1 / std::sqrt(k.size(-1));    
-    Tensor product = matmul(q, k.transpose(-2, -1), scale);  
+    Tensor product = matmul(q, k.transpose(-2, -1)) * scale;  
     Tensor scores   = nn::softmax(product, -1); 
     return matmul(scores, v);
 } 
